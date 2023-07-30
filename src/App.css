@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+}
+
+.espace {
+  height: 200vh;
+  background-color: rgba(60, 60, 60, 0.5);
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.espace p {
+  background-color: black;
+  color: white;
+}
+
+#myThreeJsCanvas {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+}
