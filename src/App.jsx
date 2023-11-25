@@ -1,17 +1,12 @@
 import { useEffect } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import "./App.css";
 
 function App() {
   useEffect(() => {
     const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(
-      50,
-      window.innerWidth / window.innerHeight,
-      1,
-      1000
-    );
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
     camera.position.z = 96;
 
     const canvas = document.getElementById("myThreeJsCanvas");
@@ -24,11 +19,11 @@ function App() {
     scene.add(ambientLight);
 
     // add cube
+    loadBlenderModel(scene);
 
     const boxGeometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
     const boxMaterial = new THREE.MeshNormalMaterial();
     const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-
     scene.add(boxMesh);
 
     const spotLight = new THREE.SpotLight(0xffffff, 1);
@@ -45,6 +40,16 @@ function App() {
     };
     animate();
   }, []);
+
+  const loadBlenderModel = (scene) => {
+    const loader = new GLTFLoader();
+
+    // Replace 'chemin/vers/votre/modele.gltf' with the actual path to your Blender model
+    loader.load('chemin/vers/votre/modele.gltf', (gltf) => {
+      const blenderModel = gltf.scene;
+      scene.add(blenderModel);
+    });
+  };
 
   return (
     <>
